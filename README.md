@@ -1,24 +1,131 @@
-# README
+# Cloverly Microservice
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-Things you may want to cover:
+  <h3 align="center">Sweater Weather</h3>
 
-* Ruby version
+  <p align="center">
+    Add Description of application.
+    <br />
+    <!-- for adding a demo video
+    <a href="Add our video link here">View Demo</a>  · -->
+    ·
+    <a href="https://github.com/s-steel/sweater_weather/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/s-steel/sweater_weather/issues">Request Feature</a>
+  </p>
+</p>
 
-* System dependencies
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-* How to run the test suite
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Configuration](#configuration)
+  * [Testing](#testing)
+* [Contributing](#contributing)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+
+
+
+### To Dos
+
+- Fill in about the project with stuff about this app.
+- Are we going to be using Rspec, how will we handle testing and coverage?
+-
+
+
+
+### Built With
+
+* [Ruby](https://github.com/ruby/ruby)
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To use this locally, you can fork or clone [this](git@github.com:s-steel/sweater_weather.git) repo.
+
+
+### Configuration
+
+1. ```git clone git@github.com:s-steel/sweater_weather.git```
+2. ```cd sweater_weather```
+3. ```bundle install```
+
+
+### Testing
+
+Sweater Weather has been fully tested. To view the test coverage;
+
+Once inside your terminal within the Sweater Weather directory run the following command.
+```
+open coverage
+```
+
+This will open up a folder with an index.html file. Clicking on this file will show you a list of all lines of code within this project, and whether they have been tested or not.
+
+Additionally, running ```bundle exec rspec``` will show you the quick summary of the test coverage in this application.
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/s-steel/sweater_weather/issues) for a list of proposed features, known issues, and project extensions.
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make this community such an amazing and fun place to learn, grow, and create! Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch ```git checkout -b feature/NewGreatFeature```
+3. Commit your Changes ```git commit -m 'Add some NewGreatFeature'```
+4. Push to the Branch ```git push origin feature/NewGreatFeature```
+5. Open a new Pull Request!
+
+
+<!-- CONTACT -->
+## Contact
+
+Sean Steel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/sean-steel/) - [GitHub](https://github.com/s-steel)
+
+
+
+Project Link: [Sweater Weather](url...)
+
+
+
+<!-- ACKNOWLEDGEMENTS -->
+<!-- Add resources that were used to help create this project here -->
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/Jonathan-M-Wilson/rails-engine
+[contributors-url]: https://github.com/Jonathan-M-Wilson/rails-engine/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Jonathan-M-Wilson/rails-engine
+[forks-url]: https://github.com/Jonathan-M-Wilson/rails-engine/network/members
+[stars-shield]: https://img.shields.io/github/stars/Jonathan-M-Wilson/rails-engine
+[stars-url]: https://github.com/Jonathan-M-Wilson/rails-engine/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Jonathan-M-Wilson/rails-engine
+[issues-url]: https://github.com/Jonathan-M-Wilson/rails-engine/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
