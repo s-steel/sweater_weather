@@ -1,4 +1,4 @@
-# Cloverly Microservice
+# Sweater Weather
 
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
