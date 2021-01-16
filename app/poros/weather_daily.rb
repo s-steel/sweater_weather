@@ -8,7 +8,7 @@ class WeatherDaily
               :icon
 
   def initialize(data)
-    @date = DateTime.strptime(data[:dt].to_s, '%s')
+    @date = get_date(data[:dt])
     @sunrise = DateTime.strptime(data[:sunrise].to_s, '%s')
     @sunset = DateTime.strptime(data[:sunset].to_s, '%s')
     @max_temp = fahrenheit(data[:temp][:max])
@@ -27,5 +27,10 @@ class WeatherDaily
 
   def fahrenheit(temp)
     (temp - 273.15) * (9 / 5) + 32
+  end
+
+  def get_date(datetime)
+    date_time = DateTime.strptime(datetime.to_s, '%s')
+    date_time.strftime('%Y-%m-%d')
   end
 end

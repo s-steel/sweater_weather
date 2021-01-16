@@ -32,34 +32,6 @@ describe 'Weather poro' do
                                   wind_speed: 0.38,
                                   wind_deg: 282,
                                   weather: [{ id: 800, main: 'Clear', description: 'clear sky', icon: '01d' }],
-                                  pop: 0 },
-                                { dt: 1_610_852_400,
-                                  temp: 282.28,
-                                  feels_like: 280.18,
-                                  pressure: 1027,
-                                  humidity: 75,
-                                  dew_point: 278.19,
-                                  uvi: 0,
-                                  clouds: 100,
-                                  visibility: 10_000,
-                                  wind_speed: 1.38,
-                                  wind_deg: 122,
-                                  weather: [{ id: 804, main: 'Clouds', description: 'overcast clouds',
-                                              icon: '04n' }],
-                                  pop: 0 },
-                                { dt: 1_611_000_000,
-                                  temp: 283.35,
-                                  feels_like: 281.06,
-                                  pressure: 1031,
-                                  humidity: 65,
-                                  dew_point: 277.07,
-                                  uvi: 1.19,
-                                  clouds: 41,
-                                  visibility: 10_000,
-                                  wind_speed: 1.36,
-                                  wind_deg: 357,
-                                  weather: [{ id: 802, main: 'Clouds', description: 'scattered clouds',
-                                              icon: '03d' }],
                                   pop: 0 }],
                        daily: [{ dt: 1_610_827_200,
                                  sunrise: 1_610_812_233,
@@ -76,33 +48,18 @@ describe 'Weather poro' do
                                              icon: '04d' }],
                                  clouds: 98,
                                  pop: 0.07,
-                                 uvi: 0.96 },
-                               { dt: 1_611_432_000,
-                                 sunrise: 1_611_416_714,
-                                 sunset: 1_611_450_544,
-                                 temp: { day: 282.17, min: 275.44, max: 282.17, night: 276.55, eve: 276.91,
-                                         morn: 275.44 },
-                                 feels_like: { day: 279.37, night: 273.77, eve: 274.23, morn: 272.29 },
-                                 pressure: 1019,
-                                 humidity: 58,
-                                 dew_point: 274.47,
-                                 wind_speed: 1.43,
-                                 wind_deg: 290,
-                                 weather: [{ id: 800, main: 'Clear', description: 'clear sky', icon: '01d' }],
-                                 clouds: 0,
-                                 pop: 0,
-                                 uvi: 2 }] }
+                                 uvi: 0.96 }] }
   end
 
   it 'creates weather objects' do
     weather_poro = WeatherCurrent.new(@response_data)
     expect(weather_poro.conditions).to eq(@response_data[:current][:weather][0][:description])
-    expect(weather_poro.datetime).to eq(DateTime.strptime(@response_data[:current][:dt].to_s, '%s'))
+    expect(weather_poro.datetime).to eq(Time.at(@response_data[:current][:dt]))
     expect(weather_poro.feels_like).to be_a(Float)
     expect(weather_poro.humidity).to eq(@response_data[:current][:humidity])
     expect(weather_poro.icon).to eq(@response_data[:current][:weather][0][:icon])
-    expect(weather_poro.sunrise).to eq(DateTime.strptime(@response_data[:current][:sunrise].to_s, '%s'))
-    expect(weather_poro.sunset).to eq(DateTime.strptime(@response_data[:current][:sunset].to_s, '%s'))
+    expect(weather_poro.sunrise).to eq(Time.at(@response_data[:current][:sunrise]))
+    expect(weather_poro.sunset).to eq(Time.at(@response_data[:current][:sunset]))
     expect(weather_poro.temperature).to be_a(Float)
     expect(weather_poro.uvi).to eq(@response_data[:current][:uvi])
     expect(weather_poro.visibility).to eq(@response_data[:current][:visibility])

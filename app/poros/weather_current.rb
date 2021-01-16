@@ -11,9 +11,9 @@ class WeatherCurrent
               :icon
 
   def initialize(data)
-    @datetime = DateTime.strptime(data[:current][:dt].to_s, '%s')
-    @sunrise = DateTime.strptime(data[:current][:sunrise].to_s, '%s')
-    @sunset = DateTime.strptime(data[:current][:sunset].to_s, '%s')
+    @datetime = Time.at(data[:current][:dt])
+    @sunrise = Time.at(data[:current][:sunrise])
+    @sunset = Time.at(data[:current][:sunset])
     @temperature = fahrenheit(data[:current][:temp])
     @feels_like = fahrenheit(data[:current][:feels_like])
     @humidity = data[:current][:humidity]

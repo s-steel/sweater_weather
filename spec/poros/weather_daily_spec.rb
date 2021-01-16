@@ -22,7 +22,7 @@ describe 'Weather poro' do
 
   it 'creates weather objects' do
     weather_poro = WeatherDaily.new(@response_data)
-    expect(weather_poro.date).to eq(DateTime.strptime(@response_data[:dt].to_s, '%s'))
+    expect(weather_poro.date).to eq(Time.at(@response_data[:dt]).strftime('%Y-%m-%d'))
     expect(weather_poro.sunrise).to eq(DateTime.strptime(@response_data[:sunrise].to_s, '%s'))
     expect(weather_poro.sunset).to eq(DateTime.strptime(@response_data[:sunset].to_s, '%s'))
     expect(weather_poro.max_temp).to be_a(Float)
