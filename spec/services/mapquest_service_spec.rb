@@ -26,6 +26,10 @@ describe 'Mapquest Service' do
       expect(lat_lng[:lng]).to eq(-123.838253)
     end
 
-    
+    it 'query with invalid params' do 
+      results = MapquestService.city_search('')
+      expect(results[:info][:statuscode]).to eq(400)
+      expect(results[:info][:messages][0]).to eq('Illegal argument from request: Insufficient info for location')
+    end
   end
 end
