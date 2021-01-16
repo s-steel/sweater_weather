@@ -11,7 +11,7 @@ class MapquestService
       parse_it(city_response)
     end
 
-private
+    private
 
     def conn
       Faraday.new('http://www.mapquestapi.com/geocoding/v1')
