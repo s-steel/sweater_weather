@@ -107,4 +107,14 @@ describe 'Weather poro' do
     expect(weather_poro.uvi).to eq(@response_data[:current][:uvi])
     expect(weather_poro.visibility).to eq(@response_data[:current][:visibility])
   end
+
+  it 'with invalid city query' do
+    response = {
+      "cod": '400',
+      "message": 'Nothing to geocode'
+    }
+    weather_poro = WeatherCurrent.new(response)
+    expect(weather_poro.conditions).to be nil
+    expect(weather_poro.sunrise).to be nil
+  end
 end
