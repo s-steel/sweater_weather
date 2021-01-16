@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'OpenWeather Service' do
   describe 'OpenWeather loction search' do
-    it 'query with valid params all undercase', :vcr do
+    it 'query with valid params', :vcr do
       latitude = 45.456
       longitude = -123.8382
       results = OpenweatherService.city_search(latitude, longitude)
