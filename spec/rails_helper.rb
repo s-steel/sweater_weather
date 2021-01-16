@@ -78,14 +78,14 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-# VCR.configure do |config|
-#   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-#   config.hook_into :webmock
-#   config.filter_sensitive_data('<DONT_EXPOSE_MY_DATA>') { ENV['MAPQUEST_CONSUMER_KEY'] }
-#   config.filter_sensitive_data('<DONT_EXPOSE_MY_DATA>') { ENV['OPENWEATHER_KEY'] }
-#   config.before_record do |i|
-#     i.response.body.force_encoding('UTF-8')
-#   end
-#   config.default_cassette_options = { record: :new_episodes }
-#   config.configure_rspec_metadata!
-# end
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.filter_sensitive_data('<DONT_EXPOSE_MY_DATA>') { ENV['MAPQUEST_CONSUMER_KEY'] }
+  config.filter_sensitive_data('<DONT_EXPOSE_MY_DATA>') { ENV['OPENWEATHER_KEY'] }
+  config.before_record do |i|
+    i.response.body.force_encoding('UTF-8')
+  end
+  config.default_cassette_options = { record: :new_episodes }
+  config.configure_rspec_metadata!
+end

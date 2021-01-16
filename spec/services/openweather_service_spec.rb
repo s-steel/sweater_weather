@@ -18,5 +18,13 @@ describe 'OpenWeather Service' do
       expect(results[:current]).to be_a(Hash)
       expect(results[:daily]).to be_an(Array)
     end
+
+    it 'query with invalid params', :vcr do 
+      latitude = 45.456
+      longitude = nil
+      results = OpenweatherService.city_search(latitude, longitude)
+      expect(results).to be_a(Hash)
+      expect(results[:message]).to eq('Nothing to geocode')
+    end
   end
 end
