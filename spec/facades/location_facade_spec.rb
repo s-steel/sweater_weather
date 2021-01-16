@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LocationFacade do
 
-  it 'returns lat and lng for a city' do
+  it 'returns lat and lng for a city', :vcr do
     city = 'tillamook, or'
     result = LocationFacade.city_search(city)
 
@@ -11,7 +11,7 @@ RSpec.describe LocationFacade do
     expect(result.longitude).to eq(-123.838253)
   end
 
-  it 'returns nil if invalid params entered' do
+  it 'returns nil if invalid params entered', :vcr do
     city = ''
     result = LocationFacade.city_search(city)
 

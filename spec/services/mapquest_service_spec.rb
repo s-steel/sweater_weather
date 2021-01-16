@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Mapquest Service' do
   describe 'Mapquest loction search' do
-    it 'query with valid params all undercase' do
+    it 'query with valid params all undercase', :vcr do
       results = MapquestService.city_search('tillamook,or')
       lat_lng = results[:results][0][:locations][0][:latLng]
       expect(results).to have_key(:results)
@@ -14,7 +14,7 @@ describe 'Mapquest Service' do
       expect(lat_lng[:lng]).to eq(-123.838253)
     end
 
-    it 'query with valid params with capitalization' do
+    it 'query with valid params with capitalization', :vcr do
       results = MapquestService.city_search('Tillamook,OR')
       lat_lng = results[:results][0][:locations][0][:latLng]
       expect(results).to have_key(:results)
@@ -26,7 +26,7 @@ describe 'Mapquest Service' do
       expect(lat_lng[:lng]).to eq(-123.838253)
     end
 
-    it 'query with invalid params' do 
+    it 'query with invalid params', :vcr do 
       results = MapquestService.city_search('')
       expect(results[:info][:statuscode]).to eq(400)
       expect(results[:info][:messages][0]).to eq('Illegal argument from request: Insufficient info for location')
