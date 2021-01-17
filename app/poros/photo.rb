@@ -6,8 +6,8 @@ class Photo
               :author,
               :author_profile
 
-  def initialize(data)
-    @location = nil
+  def initialize(data, location)
+    @location = location
     @image_url = data[:urls][:full]
     @raw_image_url = data[:urls][:raw]
     @source = 'https://unsplash.com'
