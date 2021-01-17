@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Weather API', type: :request do
   describe 'GET /weather' do
     it 'can return weather data', :vcr do
-      get '/api/v1/forcast?location=denver,co', headers: { 'Content-Type' => 'application/json',
+      get '/api/v1/forecast?location=denver,co', headers: { 'Content-Type' => 'application/json',
           'Accept' => 'application/json'
         }
       expect(response).to be_successful
@@ -66,7 +66,7 @@ RSpec.describe 'Weather API', type: :request do
     end
 
     it 'returns error with invalid params', :vcr do
-      get '/api/v1/forcast?location=', headers: { 'Content-Type' => 'application/json',
+      get '/api/v1/forecast?location=', headers: { 'Content-Type' => 'application/json',
           'Accept' => 'application/json'
         }
       expect(response).to have_http_status(404)
