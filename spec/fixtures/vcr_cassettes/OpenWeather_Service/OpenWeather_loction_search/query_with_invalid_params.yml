@@ -40,4 +40,44 @@ http_interactions:
       encoding: UTF-8
       string: '{"cod":"400","message":"Nothing to geocode"}'
   recorded_at: Sun, 17 Jan 2021 19:11:53 GMT
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/2.5/onecall?appid=<DONT_EXPOSE_MY_DATA>&exclude=alerts,minutely&lat=45.456&lon
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Sun, 17 Jan 2021 19:31:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '44'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/2.5/onecall?exclude=alerts%2Cminutely&lat=45.46&lon="
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"cod":"400","message":"Nothing to geocode"}'
+  recorded_at: Sun, 17 Jan 2021 19:31:56 GMT
 recorded_with: VCR 6.0.0

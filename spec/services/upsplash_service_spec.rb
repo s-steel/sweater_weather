@@ -5,7 +5,6 @@ describe 'Upsplash Service' do
     it 'query with valid params', :vcr do
       location = 'denver,co'
       results = UpsplashService.image_search(location)
-
       expect(results).to have_key(:results)
       expect(results[:results]).to be_an(Array)
       expect(results[:results][0]).to have_key(:id)
