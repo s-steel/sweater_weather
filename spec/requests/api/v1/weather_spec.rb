@@ -71,7 +71,7 @@ RSpec.describe 'Weather API', type: :request do
         }
       expect(response).to have_http_status(404)
       forecast = JSON.parse(response.body, symbolize_names: true)
-      expect(forcast[:error]).to eq('City not found, try again with proper params => ex. denver,co')
+      expect(forecast[:error]).to eq('City not found, try again with proper params => ex. denver,co')
     end
   end
 end
