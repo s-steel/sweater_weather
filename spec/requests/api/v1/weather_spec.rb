@@ -64,5 +64,14 @@ RSpec.describe 'Weather API', type: :request do
       expect(hourly[0]).to_not have_key(:pop)
       expect(hourly[0]).to_not have_key(:feels_like)
     end
+
+    it 'returns error with invalid params', :vcr do
+      get '/api/v1/forcast?location=', headers: { 'Content-Type' => 'application/json',
+          'Accept' => 'application/json'
+        }
+      expect(response).to have_http_status(404)
+      forecast = JSON.parse(response.body, symbolize_names: true)
+      expect(forcast[:error]).to eq('City not found, try again with proper params => ex. denver,co')
+    end
   end
 end

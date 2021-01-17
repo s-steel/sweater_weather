@@ -22,9 +22,9 @@ describe 'Weather poro' do
     expect(weather_poro.conditions).to eq(@response_data[:weather][0][:description])
     expect(weather_poro.temperature).to be_a(Float)
     expect(weather_poro.icon).to eq(@response_data[:weather][0][:icon])
-    expect(weather_poro.wind_speed).to eq(@response_data[:wind_speed] * 2.2369)
+    expect(weather_poro.wind_speed).to eq("#{(@response_data[:wind_speed] * 2.2369).round(2)} mph")
     expect(weather_poro.time).to eq(Time.at(@response_data[:dt]).strftime('%H:%m'))
-    expect(weather_poro.wind_direction).to eq('WNW')
+    expect(weather_poro.wind_direction).to eq('from WNW')
   end
 
   it 'with invalid city query' do
