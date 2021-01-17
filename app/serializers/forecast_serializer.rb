@@ -5,6 +5,7 @@ class ForecastSerializer
     {
       "data": {
         "id": nil,
+        "type": "forecast",
         "attributes": {
           "current_weather": object[:current_weather],
           "daily_weather": object[:daily_weather],

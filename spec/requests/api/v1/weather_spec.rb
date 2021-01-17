@@ -15,6 +15,8 @@ RSpec.describe 'Weather API', type: :request do
       hourly = forecast_data[:attributes][:hourly_weather]
       expect(forecast_data[:id]).to be nil
       expect(forecast_data[:type]).to eq('forecast')
+      expect(daily.length).to eq(5)
+      expect(hourly.length).to eq(8)
 
     end
   end

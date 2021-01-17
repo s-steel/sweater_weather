@@ -32,42 +32,43 @@ class WeatherHourly
   end
 
   def get_wind_speed(wind_data)
-    wind_data * 2.2369
+    speed = (wind_data * 2.2369).round(2)
+    "#{speed} mph"
   end
 
   def get_wind_direction(wind_data)
     if wind_data >= 11.25 && wind_data < 33.75
-      'NNE'
+      'from NNE'
     elsif wind_data >=  33.75 && wind_data <  56.25
-      'NE'
+      'from NE'
     elsif wind_data >=  56.25 && wind_data <  78.75
-      'ENE'
+      'from ENE'
     elsif wind_data >=  78.75 && wind_data < 101.25
-      'E'
+      'from E'
     elsif wind_data >= 101.25 && wind_data < 123.75
-      'ESE'
+      'from ESE'
     elsif wind_data >= 123.75 && wind_data < 146.25
-      'SE'
+      'from SE'
     elsif wind_data >= 146.25 && wind_data < 168.75
-      'SSE'
+      'from SSE'
     elsif wind_data >= 168.75 && wind_data < 191.25
-      'S'
+      'from S'
     elsif wind_data >= 191.25 && wind_data < 213.75
-      'SSW'
+      'from SSW'
     elsif wind_data >= 213.75 && wind_data < 236.25
-      'SW'
+      'from SW'
     elsif wind_data >= 236.25 && wind_data < 258.75
-      'WSW'
+      'from WSW'
     elsif wind_data >= 258.75 && wind_data < 281.25
-      'W'
+      'from W'
     elsif wind_data >= 281.25 && wind_data < 303.75
-      'WNW'
+      'from WNW'
     elsif wind_data >= 303.75 && wind_data < 326.25
-      'NW'
+      'from NW'
     elsif wind_data >= 326.25 && wind_data < 348.75
-      'NNW'
+      'from NNW'
     else
-      'N'
+      'from N'
     end
   end
 end
