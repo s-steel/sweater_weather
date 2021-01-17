@@ -1,4 +1,9 @@
-class ForcastFacade
+class ForecastFacade
+  attr_reader :id
+  def initialize
+    @id = nil
+  end
+  
   class << self
     def city_search(latitude, longitude)
       response = OpenweatherService.city_search(latitude, longitude)

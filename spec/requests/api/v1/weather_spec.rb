@@ -2,16 +2,20 @@ require 'rails_helper'
 
 RSpec.describe 'Weather API', type: :request do
   describe 'GET /weather' do
-    it 'can return weather data' do
-      get 'api/v1/forcast?location=denver,co', headers: { 'Content-Type' => 'application/json',
+    it 'can return weather data', :vcr do
+      get '/api/v1/forcast?location=denver,co', headers: { 'Content-Type' => 'application/json',
           'Accept' => 'application/json'
         }
-require 'pry', binding.pry
       expect(response).to be_successful
       expect(response).to have_http_status(200)
-      forcast = JSON.parse(response.body, symbolize_names: true)
-      merchant_data = forcast[:data]
-      expect(forcast).to_not be_empty
+      forecast = JSON.parse(response.body, symbolize_names: true)
+      forecast_data = forecast[:data]
+      current = forecast_data[:attributes][:current_weather]
+      daily = forecast_data[:attributes][:daily_weather]
+      hourly = forecast_data[:attributes][:hourly_weather]
+      expect(forecast_data[:id]).to be nil
+      expect(forecast_data[:type]).to eq('forecast')
+
     end
   end
 end
