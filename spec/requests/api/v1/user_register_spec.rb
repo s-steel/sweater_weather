@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe 'User Register', type: :request do
   describe 'POST /api/v1/users' do
     it 'can register the user and return their api key' do
-      post '/api/v1/users', headers: { 'Content-Type' => 'application/json',
-                                       'Accept' => 'application/json' }, body: {
-                                         "email": 'whatever@example.com',
-                                         "password": 'password',
-                                         "password_confirmation": 'password'
-                                       }
+      post '/api/v1/users', params: {
+        "email": 'whatever@example.com',
+        "password": 'password',
+        "password_confirmation": 'password'
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                                       'Accept' => 'application/json' }
       expect(response).to be_successful
       expect(response).to have_http_status(201)
       user_reponse = JSON.parse(response.body, symbolize_names: true)
