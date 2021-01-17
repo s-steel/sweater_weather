@@ -66,7 +66,7 @@ RSpec.describe 'Weather API', type: :request do
     end
 
     it 'returns error with invalid params', :vcr do
-      get '/api/v1/forcast?location=', headers: { 'Content-Type' => 'application/json',
+      get '/api/v1/forecast?location=', headers: { 'Content-Type' => 'application/json',
           'Accept' => 'application/json'
         }
       expect(response).to have_http_status(404)

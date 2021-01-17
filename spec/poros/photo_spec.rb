@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Photo poro' do
   before :each do
+    @location = 'denver,co'
     @response_data = { id: 'hdzGZRCYMSU',
                        created_at: '2020-09-13T19:54:14-04:00',
                        updated_at: '2021-01-17T01:19:07-05:00',
@@ -38,8 +39,8 @@ describe 'Photo poro' do
   end
 
   it 'creates photo objects' do
-    photo_poro = Photo.new(@response_data)
-    expect(photo_poro.location).to be nil
+    photo_poro = Photo.new(@response_data, @location)
+    expect(photo_poro.location).to eq(@location)
     expect(photo_poro.image_url).to eq(@response_data[:urls][:full])
     expect(photo_poro.raw_image_url).to eq(@response_data[:urls][:raw])
     expect(photo_poro.source).to eq('https://unsplash.com')
@@ -48,8 +49,9 @@ describe 'Photo poro' do
   end
 
   it 'with invalid params' do
+    location = nil
     response = { total: 0, total_pages: 0, results: [] }
-    photo_poro = Photo.new(response)
+    photo_poro = Photo.new(response, location)
     expect(photo_poro.location).to be nil
     expect(photo_poro.image_url).to be nil
     expect(photo_poro.source).to be nil
