@@ -30,7 +30,7 @@ class WeatherDaily
   end
 
   def get_date(datetime)
-    date_time = DateTime.strptime(datetime.to_s, '%s')
+    date_time = Time.at(datetime)
     date_time.strftime('%Y-%m-%d')
   end
 end
