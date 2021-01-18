@@ -50,5 +50,30 @@ describe 'Mapquest Service' do
       expect(route[:locations][1][:latLng][:lat]).to be_a(Float)
       expect(route[:locations][1][:latLng][:lat]).to eq(39.738453)
     end
+
+    it 'query with valid params with capitalization', :vcr do
+      from = 'Tillamook,OR'
+      to = 'denver,CO'
+      results = MapquestService.road_trip(from, to)
+      route = results[:route]
+      expect(route).to have_key(:distance)
+      expect(route[:distance]).to be_a(Numeric)
+      expect(route).to have_key(:time)
+      expect(route[:time]).to be_a(Numeric)
+      expect(route[:locations][1][:latLng]).to have_key(:lng)
+      expect(route[:locations][1][:latLng]).to have_key(:lat)
+      expect(route[:locations][1][:latLng][:lng]).to be_a(Float)
+      expect(route[:locations][1][:latLng][:lng]).to eq(-104.984853)
+      expect(route[:locations][1][:latLng][:lat]).to be_a(Float)
+      expect(route[:locations][1][:latLng][:lat]).to eq(39.738453)
+    end
+
+    it 'query with invalid params', :vcr do 
+      from = 'Tillamook,OR'
+      to = ''
+      results = MapquestService.road_trip(from, to)
+      expect(results[:info][:statuscode]).to eq(611)
+      expect(results[:info][:messages][0]).to eq('At least two locations must be provided.')
+    end
   end
 end
