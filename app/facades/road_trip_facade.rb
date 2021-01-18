@@ -5,7 +5,15 @@ class RoadTripFacade
       @road_trip = RoadTrip.new(response)
       time = hours_to_arrival(@road_trip.travel_time)
       weather = weather_at_arrival(time)
-      
+      require 'pry', binding.pry
+      {
+        start_city: @road_trip.start_city,
+        end_city: @road_trip.end_city,
+        travel_time: @road_trip.travel_time,
+        weather_at_eta: {
+          temperature: weather.temperature,
+          conditions: weather.conditions
+        }}
     end
 
     def hourly_weather(data)
@@ -25,7 +33,3 @@ class RoadTripFacade
     end
   end
 end
-
-
-# road_trip.travel_time.delete('hoursminutes').split(',')[0].delete(' ').to_i
-# weather[x + 1]
