@@ -59,5 +59,38 @@ RSpec.describe 'User Register', type: :request do
       expect(response).to have_http_status(422)
       expect(response.body).to match(/Validation failed: Email has already been taken, Password confirmation doesn't match Password/)
     end
+
+    it 'error with blank email' do
+      post '/api/v1/users', params: {
+      "email": '',
+      "password": 'password',
+      "password_confirmation": 'Password'
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(422)
+      expect(response.body).to match(/Validation failed: Email can't be blank/)
+    end
+
+    it 'error with blank password' do
+      post '/api/v1/users', params: {
+      "email": 'tester@email.com',
+      "password": '',
+      "password_confirmation": 'Password'
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(422)
+      expect(response.body).to match(/Validation failed: Password digest can't be blank/)
+    end
+
+    it 'error with blank password' do
+      post '/api/v1/users', params: {
+      "email": 'tester@email.com',
+      "password": 'password',
+      "password_confirmation": ''
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(422)
+      expect(response.body).to match(/Validation failed: Password confirmation doesn't match Password, Password confirmation can't be blank/)
+    end
   end
 end
