@@ -7,7 +7,7 @@ class OpenweatherService
       weather_response = conn.get do |req|
         req.params['lat'] = latitude
         req.params['lon'] = longitude
-        req.params['exclude'] = 'alerts,minutely'
+        req.params['exclude'] = 'alerts'
         req.params['appid'] = ENV['OPENWEATHER_KEY']
       end
       parse_it(weather_response)
