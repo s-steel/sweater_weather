@@ -32,7 +32,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                                         'Accept' => 'application/json' } 
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Email has already been taken/)
+      expect(response.body).to match('Validation failed: Email has already been taken')
     end
 
     it 'error with invalid password' do
@@ -43,7 +43,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Password confirmation doesn't match Password/)
+      expect(response.body).to match('Validation failed: Password confirmation doesn\'t match Password')
     end
 
     it 'error with invalid email and password' do
@@ -57,7 +57,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Email has already been taken, Password confirmation doesn't match Password/)
+      expect(response.body).to match('Validation failed: Email has already been taken, Password confirmation doesn\'t match Password')
     end
 
     it 'error with blank email' do
@@ -68,7 +68,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Email can't be blank/)
+      expect(response.body).to match('Validation failed: Email can\'t be blank')
     end
 
     it 'error with blank password' do
@@ -79,7 +79,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Password digest can't be blank/)
+      expect(response.body).to match('Validation failed: Password digest can\'t be blank')
     end
 
     it 'error with blank password' do
@@ -90,7 +90,7 @@ RSpec.describe 'User Register', type: :request do
       }.to_json, headers: { 'Content-Type' => 'application/json',
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(422)
-      expect(response.body).to match(/Validation failed: Password confirmation doesn't match Password, Password confirmation can't be blank/)
+      expect(response.body).to match('Validation failed: Password confirmation doesn\'t match Password, Password confirmation can\'t be blank')
     end
   end
 end
