@@ -29,11 +29,13 @@ describe 'Weather poro' do
 
   it 'with invalid city query' do
     response = {
-      "cod": '400',
+      "code": '400',
       "message": 'Nothing to geocode'
     }
-    weather_poro = WeatherCurrent.new(response)
+    weather_poro = WeatherHourly.new(response)
     expect(weather_poro.conditions).to be nil
-    expect(weather_poro.sunrise).to be nil
+    expect(weather_poro.temperature).to be nil
+    expect(weather_poro.time).to be nil
+    expect(weather_poro.wind_direction).to be nil
   end
 end
