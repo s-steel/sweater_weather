@@ -5,7 +5,6 @@ class RoadTripFacade
       @road_trip = RoadTrip.new(response)
       time = hours_to_arrival(@road_trip.travel_time)
       weather = weather_at_arrival(time)
-      require 'pry', binding.pry
       {
         start_city: @road_trip.start_city,
         end_city: @road_trip.end_city,
@@ -29,7 +28,8 @@ class RoadTripFacade
     def weather_at_arrival(data)
       forecast = OpenweatherService.city_search(@road_trip.end_latitude, @road_trip.end_longitude)
       weather = hourly_weather(forecast)
-      weather[data + 1]
+      weather[data - 1]
+      # Rescue this for longer time frames
     end
   end
 end

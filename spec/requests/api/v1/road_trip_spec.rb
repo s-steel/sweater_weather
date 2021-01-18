@@ -8,7 +8,7 @@ RSpec.describe 'Road Trip', type: :request do
                            password_confirmation: 'password')
     end
 
-    it 'can login the user and return their api key', :vcr do
+    xit 'can login the user and return their api key', :vcr do
       post '/api/v1/road_trip', params: {
         "origin": 'Denver,CO',
         "destination": 'Pueblo,CO',
