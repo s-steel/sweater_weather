@@ -11,10 +11,12 @@ RSpec.describe 'User Register', type: :request do
                                        'Accept' => 'application/json' }
       expect(response).to be_successful
       expect(response).to have_http_status(201)
-      user_reponse = JSON.parse(response.body, symbolize_names: true)
-      user_data = user_reponse[:data][:attributes]
+      user_response = JSON.parse(response.body, symbolize_names: true)
+      user_data = user_response[:data][:attributes]
       user = User.last
 
+      expect(user_response[:data][:type]).to eq('user')
+      expect(user_response[:data][:id]).to eq(user.id.to_s)
       expect(user.email).to eq(user_data[:email])
       expect(user.api_key).to eq(user_data[:api_key])
     end
