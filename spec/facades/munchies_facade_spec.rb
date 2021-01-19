@@ -15,4 +15,13 @@ RSpec.describe MunchiesFacade do
     expect(result[:restaurant][:name]).to be_a(String)
     expect(result[:restaurant][:address]).to be_a(String)
   end
+
+  it 'returns error with invalid params', :vcr do
+    from = 'denver,co'
+    to = nil
+    categories = 'chinese'
+    result = MunchiesFacade.restaurant_search(from, to, categories)
+    expect(result).to be_a(Hash)
+    expect(result[:error]).to eq('Invalid params')
+  end
 end
