@@ -45,5 +45,22 @@ RSpec.describe 'Road Trip', type: :request do
                             'Accept' => 'application/json' }
       expect(response).to have_http_status(401)
     end
+
+    it 'return impossible travel time for impopssible destinations', :vcr do
+      post '/api/v1/road_trip', params: {
+        "origin": 'New York, NY',
+        "destination": 'London, UK',
+        "api_key": @user.api_key.to_s
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(200)
+      road_trip_response = JSON.parse(response.body, symbolize_names: true)
+      road_trip_data = road_trip_response[:data][:attributes]
+      expect(road_trip_data[:travel_time]).to be_a(String)
+      expect(road_trip_data[:travel_time]).to eq('impossible')
+      expect(road_trip_data[:weather_at_eta]).to be_a(Hash)
+      expect(road_trip_data[:weather_at_eta]).to_not have_key(:temperature)
+      expect(road_trip_data[:weather_at_eta]).to_not have_key(:conditions)
+    end
   end
 end

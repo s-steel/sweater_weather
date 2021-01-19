@@ -1,8 +1,8 @@
 class RoadTrip
-  attr_reader :start_city,
-              :end_city,
-              :travel_time,
-              :end_latitude,
+  attr_accessor :start_city,
+                :end_city,
+                :travel_time
+  attr_reader :end_latitude,
               :end_longitude
 
   def initialize(data)
