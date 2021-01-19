@@ -1,5 +1,6 @@
 class Api::V1::MunchiesController < ApplicationController
   def index
+    data = MunchiesFacade.restaurant_search(start_city, end_city)
     # if params[:location] == ''
     #   json_response({
     #                   error: 'City not found, try again with proper params => ex. denver,co'
