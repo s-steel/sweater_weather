@@ -8,7 +8,7 @@ RSpec.describe 'Road Trip', type: :request do
                            password_confirmation: 'password')
     end
 
-    xit 'can login the user and return their api key', :vcr do
+    it 'can login the user and return their api key', :vcr do
       post '/api/v1/road_trip', params: {
         "origin": 'Denver,CO',
         "destination": 'Pueblo,CO',
@@ -17,7 +17,7 @@ RSpec.describe 'Road Trip', type: :request do
                             'Accept' => 'application/json' }
 
       expect(response).to be_successful
-      # expect(response).to have_http_status(200)
+      expect(response).to have_http_status(200)
       road_trip_response = JSON.parse(response.body, symbolize_names: true)
       road_trip_data = road_trip_response[:data][:attributes]
 
@@ -30,9 +30,9 @@ RSpec.describe 'Road Trip', type: :request do
       expect(road_trip_data[:weather_at_eta][:temperature]).to be_a(Float)
       expect(road_trip_data[:weather_at_eta][:conditions]).to be_a(String)
 
-      expect(road_trip_data[:start_city]).to eq('Denver,CO')
-      expect(road_trip_data[:end_city]).to eq('Pueblo,CO')
-      expect(road_trip_data[:travel_time]).to eq('1 hour 48 mins')
+      expect(road_trip_data[:start_city]).to eq('Denver, CO')
+      expect(road_trip_data[:end_city]).to eq('Pueblo, CO')
+      expect(road_trip_data[:travel_time]).to eq('01 hours, 44 minutes')
     end
 
     it 'if no api key is given return 401 status'

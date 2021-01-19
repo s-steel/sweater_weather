@@ -2,7 +2,7 @@ class Api::V1::RoadTripController < ApplicationController
   def create
     user = find_user
     road_trip = RoadTripFacade.road_trip(params[:origin], params[:destination])
-    # json_response(RoadTripSerializer.new(road_trip))
+    json_response(RoadTripSerializer.road_trip(road_trip))
   end
 
   private
