@@ -6,23 +6,13 @@ RSpec.describe MunchiesFacade do
     to = 'pueblo,co'
     categories = 'chinese'
     result = MunchiesFacade.restaurant_search(from, to, categories)
-
-    expect(result.end_city).to be_a(String)
-    # expect(result.start_city).to be_a(String)
-    # expect(result.travel_time).to be_a(String)
-    # expect(result.end_longitude).to be_a(Float)
-    # expect(result.end_latitude).to be_a(Float)
-  end
-
-  xit 'returns nil if invalid params entered', :vcr do
-    from = 'tillamook,or'
-    to = ''
-    result = MunchiesFacade.restaurant_search(from, to)
-    expect(result).to be_a(RoadTrip)
-    expect(result.end_latitude).to be nil
-    expect(result.end_longitude).to be nil
-    expect(result.end_city).to be nil
-    expect(result.start_city).to be nil
-    expect(result.travel_time).to be nil
+    expect(result).to be_a(Hash)
+    expect(result[:destination_city]).to be_a(String)
+    expect(result[:travel_time]).to be_a(String)
+    expect(result[:forecast]).to be_a(Hash)
+    expect(result[:forecast][:summary]).to be_a(String)
+    expect(result[:forecast][:temperature]).to be_a(String)
+    expect(result[:restaurant][:name]).to be_a(String)
+    expect(result[:restaurant][:address]).to be_a(String)
   end
 end

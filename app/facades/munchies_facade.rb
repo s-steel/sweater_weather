@@ -1,24 +1,22 @@
 class MunchiesFacade
   class << self
     def restaurant_search(from, to, categories)
-      # route_response = MapquestService.road_trip(from, to)
-      # @travel_info = RoadTrip.new(route_response)
-      # forecast = OpenweatherService.city_search(@road_trip.end_latitude, @road_trip.end_longitude)
-      # current_weather = WeatherCurrent.new(forecast)
       trip_info = travel_info(from, to)
       weather = forecast(trip_info.end_latitude, trip_info.end_longitude)
       open_at = arrival_time(from, to)
-      require 'pry', binding.pry
-      time = hours_to_arrival(@road_trip.travel_time)
-      weather = weather_at_arrival(time)
+      restaurant_info = find_restaurants(trip_info.end_city, open_at, categories).first
       {
-        start_city: @road_trip.start_city,
-        end_city: @road_trip.end_city,
-        travel_time: @road_trip.travel_time,
-        weather_at_eta: {
-          temperature: weather.temperature,
-          conditions: weather.conditions
-        }}
+        destination_city: trip_info.end_city,
+        travel_time: trip_info.travel_time,
+        forecast: {
+          summary: weather.conditions,
+          temperature: weather.temperature.round(2).to_s
+        },
+        restaurant: {
+          name: restaurant_info.name,
+          address: restaurant_info.address.join
+        }
+      }
     end
 
     private
@@ -37,21 +35,12 @@ class MunchiesFacade
       travel_time = MapquestService.road_trip(from, to)[:route][:time]
       Time.now.to_i + travel_time
     end
-  #   def hourly_weather(data)
-  #     data[:hourly].map do |hour|
-  #       WeatherHourly.new(hour)
-  #     end
-  #   end
 
-  #   def hours_to_arrival(data)
-  #     data.split(',')[0].delete(' hours').to_i
-  #   end
-
-  #   def weather_at_arrival(data)
-  #     forecast = OpenweatherService.city_search(@road_trip.end_latitude, @road_trip.end_longitude)
-  #     weather = hourly_weather(forecast)
-  #     weather[data - 1]
-  #     # Rescue this for longer time frames
-  #   end
+    def find_restaurants(location, open_at, categories)
+      restaurant_response = YelpService.restaurant_search(location, open_at, categories)
+      restaurant_response.map do |rest|
+        Restaurant.new(rest)
+      end
+    end
   end
 end
