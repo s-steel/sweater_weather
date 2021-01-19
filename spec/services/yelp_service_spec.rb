@@ -20,5 +20,13 @@ describe 'Yelp Service' do
       expect(results[0]['location']['city']).to be_a(String)
       expect(results[0]['location']['display_address']).to be_an(Array)
     end
+
+    it 'query with invalid params', :vcr do
+      location = nil
+      open_at = 1611083495
+      categories = 'chinese'
+      results = YelpService.restaurant_search(location, open_at, categories)
+      expect(results).to be nil
+    end
   end
 end

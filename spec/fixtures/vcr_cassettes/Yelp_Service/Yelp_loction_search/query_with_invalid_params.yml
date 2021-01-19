@@ -1,0 +1,113 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.yelp.com/v3/businesses/search?categories=chinese&location&open_at=1611083495
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer Fv3iehwgkB9_XvWrJSKFFsVVy-kj3zdUeldW9lQ3JEt_9AZ-sTugSHrY5qZPORd5bL27VWpW4rsS1bv9ytUVMLX7Hv-eBn4oGXPVLgWgt6Cd3SIsDJ32sXvJU_4FYHYx
+      User-Agent:
+      - Faraday v0.17.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '110'
+      Content-Type:
+      - application/json
+      X-Routing-Service:
+      - routing-main--uswest2-5b584d59bc-bdz29; site=public_api_v3
+      Server:
+      - envoy
+      X-Zipkin-Id:
+      - e731a32d530f8fc6
+      X-B3-Sampled:
+      - '0'
+      X-Proxied:
+      - 10-69-172-176-uswest2bprod
+      X-Extlb:
+      - 10-69-172-176-uswest2bprod
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Tue, 19 Jan 2021 18:35:21 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-den8252-DEN
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: '{"error": {"code": "VALIDATION_ERROR", "description": "'''' is too
+        short", "field": "location", "instance": ""}}'
+  recorded_at: Tue, 19 Jan 2021 18:35:21 GMT
+- request:
+    method: get
+    uri: https://api.yelp.com/v3/businesses/search?categories=chinese&location&open_at=1611083495
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer Fv3iehwgkB9_XvWrJSKFFsVVy-kj3zdUeldW9lQ3JEt_9AZ-sTugSHrY5qZPORd5bL27VWpW4rsS1bv9ytUVMLX7Hv-eBn4oGXPVLgWgt6Cd3SIsDJ32sXvJU_4FYHYx
+      User-Agent:
+      - Faraday v0.17.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '110'
+      Content-Type:
+      - application/json
+      X-Routing-Service:
+      - routing-main--uswest2-5b584d59bc-c4hft; site=public_api_v3
+      Server:
+      - envoy
+      X-Zipkin-Id:
+      - 3cc54eb170fabeaa
+      X-B3-Sampled:
+      - '0'
+      X-Proxied:
+      - 10-69-95-86-uswest2aprod
+      X-Extlb:
+      - 10-69-95-86-uswest2aprod
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Tue, 19 Jan 2021 18:37:03 GMT
+      Via:
+      - 1.1 varnish
+      X-Served-By:
+      - cache-den8282-DEN
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: '{"error": {"code": "VALIDATION_ERROR", "description": "'''' is too
+        short", "field": "location", "instance": ""}}'
+  recorded_at: Tue, 19 Jan 2021 18:37:03 GMT
+recorded_with: VCR 6.0.0
