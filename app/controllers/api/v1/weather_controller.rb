@@ -6,7 +6,8 @@ class Api::V1::WeatherController < ApplicationController
                     }, status = 404)
     else
       location = LocationFacade.city_search(params[:location])
-      json_response(ForecastSerializer.forecast(ForecastFacade.city_search(location.latitude, location.longitude)))
+      json_response(ForecastSerializer.forecast(ForecastFacade.city_search(location.latitude, location.longitude, 5,
+                                                                           8)))
     end
   end
 end
