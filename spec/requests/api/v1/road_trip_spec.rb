@@ -35,6 +35,15 @@ RSpec.describe 'Road Trip', type: :request do
       expect(road_trip_data[:travel_time]).to eq('01 hours, 44 minutes')
     end
 
-    it 'if no api key is given return 401 status'
+    it 'if no api key is given return 401 status', :vcr do
+      wrong_api_key = 'wrongkeyhere'
+      post '/api/v1/road_trip', params: {
+        "origin": 'Denver,CO',
+        "destination": 'Pueblo,CO',
+        "api_key": wrong_api_key
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(401)
+    end
   end
 end
