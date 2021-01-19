@@ -21,5 +21,13 @@ RSpec.describe 'Yelp API', type: :request do
       expect(attributes[:restaurant][:name]).to be_a(String)
       expect(attributes[:restaurant][:address]).to be_a(String)
     end
+
+    it 'returns error with invalid params', :vcr do
+      get '/api/v1/munchies?start=denver,co&food=chinese', headers: { 'Content-Type' => 'application/json',
+        'Accept' => 'application/json' }
+      expect(response).to have_http_status(422)
+      error = JSON.parse(response.body, symbolize_names: true)
+      expect(error[:error]).to eq('Invalid params')
+    end
   end
 end

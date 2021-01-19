@@ -17,6 +17,8 @@ class MunchiesFacade
           address: restaurant_info.address.join
         }
       }
+    rescue StandardError
+      { error: 'Invalid params' }
     end
 
     private
