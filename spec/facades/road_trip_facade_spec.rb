@@ -23,4 +23,17 @@ RSpec.describe RoadTripFacade do
     result = RoadTripFacade.road_trip(from, to)
     expect(result[:error]).to eq('Invalid params')
   end
+
+  it 'returns impossible if travel is impossible', :vcr do
+    from = 'tillamook,or'
+    to = 'London,uk'
+    result = RoadTripFacade.road_trip(from, to)
+    expect(result[:start_city]).to eq(from)
+    expect(result[:end_city]).to eq(to)
+    expect(result[:travel_time]).to be_a(String)
+    expect(result[:travel_time]).to eq('impossible')
+    expect(result[:weather_at_eta]).to be_a(Hash)
+    expect(result[:weather_at_eta]).to_not have_key(:temperature)
+    expect(result[:weather_at_eta]).to_not have_key(:conditions)
+  end
 end
