@@ -1,16 +1,20 @@
 class RoadTripFacade
   class << self
     def road_trip(from, to)
-      response = MapquestService.road_trip(from, to)
-      @road_trip = road_trip_data(response, from, to)
-      time = hours_to_arrival(@road_trip.travel_time)
-      weather = weather_at_arrival(time)
-      {
-        start_city: @road_trip.start_city,
-        end_city: @road_trip.end_city,
-        travel_time: @road_trip.travel_time,
-        weather_at_eta: weather_info(weather)
-      }
+      if from == '' || to == ''
+        { error: 'Invalid params' }
+      else
+        response = MapquestService.road_trip(from, to)
+        @road_trip = road_trip_data(response, from, to)
+        time = hours_to_arrival(@road_trip.travel_time)
+        weather = weather_at_arrival(time)
+        {
+          start_city: @road_trip.start_city,
+          end_city: @road_trip.end_city,
+          travel_time: @road_trip.travel_time,
+          weather_at_eta: weather_info(weather)
+        }
+      end
     end
 
     private
