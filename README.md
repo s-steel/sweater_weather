@@ -9,7 +9,7 @@
   <h3 align="center">Sweater Weather</h3>
 
   <p align="center">
-    Add Description of application.
+    Sweater Weather was built to be used as a backend application that the frontend will then communicate with in order to get the necessary information.  The overall application is for planning road trips, and will allow users to see the current weather as well as the forecasted weather at the destination.  The frontend communicates with this backend piece through an API, which the backend then exposes the infomation coming from the APIs in the proper format that satisfies the frontend team's requirments.
     <br />
     <!-- for adding a demo video
     <a href="Add our video link here">View Demo</a>  · -->
@@ -28,6 +28,12 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
+* [Endpoints](#endpoints)
+  * [Forecast](#forecast)
+  * [Background](#background)
+  * [User Registration](#user-registration)
+  * [User Login](#user-login)
+  * [Road Trip](#road-trip)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Configuration](#configuration)
@@ -42,21 +48,151 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
-
-
-### To Dos
-
-- Fill in about the project with stuff about this app.
-- Are we going to be using Rspec, how will we handle testing and coverage?
--
-
+Three APIs were used in this project in order to obtain the required information.  All weather data is coming from the [Open Weather](https://openweathermap.org/api/one-call-api) one call API.  The [MapQuest](https://developer.mapquest.com/documentation/geocoding-api/) API was used in order to obtain latitude and longitude coordinates for a city that were then used to query the Open Weather API.  Finally the [Upsplash](https://unsplash.com/developers) API was used in order to provide the frontend with a backgroud image of a specified city.
 
 
 ### Built With
 
 * [Ruby](https://github.com/ruby/ruby)
 
+
+## Endpoints
+
+### Forecast
+
+#### Request the forecast for a given city: `GET /api/v1/forecast`
+example: `http://localhost:3000/api/v1/forecast?location=denver,co`
+```
+{
+  "data": {
+    "id": null,
+    "type": "forecast",
+    "attributes": {
+      "current_weather": {
+        "datetime": "2020-09-30 13:27:03 -0600",
+        "temperature": 79.4,
+        etc
+      },
+      "daily_weather": [
+        {
+          "date": "2020-10-01",
+          "sunrise": "2020-10-01 06:10:43 -0600",
+          etc
+        },
+        {...} etc
+      ],
+      "hourly_weather": [
+        {
+          "time": "14:00:00",
+          "wind_speed": "4 mph",
+          "wind_direction": "from NW",
+          etc
+        },
+        {...} etc
+      ]
+    }
+  }
+}
+```
+  
+### Background
+
+#### Request a background image for a given city: `GET /api/v1/backgrounds`
+example: `http://localhost:3000/api/v1/backgrounds?location=denver,co`
+```
+{
+{
+    "data": {
+        "id": null,
+        "type": "image",
+        "attributes": {
+            "image": {
+                "location": "denver,co",
+                "image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?crop=entropy&cs=srgb&fm=jpg&ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1&q=85",
+                "raw_image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1",
+                "credit": {
+                    "source": "https://unsplash.com",
+                    "author": "Michael Kilcoyne",
+                    "author_profile": "https://unsplash.com/@mikekilcoyne"
+                }
+            }
+        }
+    }
+}
+```    
+    
+### User Registration
+
+#### Register a user and return a unique API key: `POST /api/v1/users`
+example: `http://localhost:3000/api/v1/users`<br>
+         ```body: {
+                "email": "whatever@example.com",
+                "password": "password",
+                "password_confirmation": "password"
+              }```
+
+```
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
+
+### User Login
+
+#### Login a user and return their API key: `POST /api/v1/sessions`
+example: `http://localhost:3000/api/v1/sessions`<br>
+         ```body: {
+                "email": "whatever@example.com",
+                "password": "password"
+              }```
+
+```
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
+  
+### Road Trip
+
+#### Login a user and return their API key: `POST /api/v1/road_trip`
+example: `http://localhost:3000/api/v1/road_trip`<br>
+         ```body: {
+                  "origin": "Denver,CO",
+                  "destination": "Pueblo,CO",
+                  "api_key": "jgn983hy48thw9begh98h4539h4"
+                }```
+
+```
+{
+  "data": {
+    "id": null,
+    "type": "roadtrip",
+    "attributes": {
+      "start_city": "Denver, CO",
+      "end_city": "Estes Park, CO",
+      "travel_time": "2 hours, 13 minutes"
+      "weather_at_eta": {
+        "temperature": 59.4,
+        "conditions": "partly cloudy"
+      }
+    }
+  }
+}
+```
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -69,6 +205,10 @@ To use this locally, you can fork or clone [this](git@github.com:s-steel/sweater
 1. ```git clone git@github.com:s-steel/sweater_weather.git```
 2. ```cd sweater_weather```
 3. ```bundle install```
+4. ```rake db:{create,migrate,seed}```
+5. ```rails s```
+
+From here you can make api calls to your local server. I recommend using [Postman](https://www.postman.com/) in order to make these call and see the results.
 
 
 ### Testing
@@ -109,7 +249,7 @@ Sean Steel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [![Link
 
 
 
-Project Link: [Sweater Weather](url...)
+Project Link: [Sweater Weather](https://github.com/s-steel/sweater_weather)
 
 
 
