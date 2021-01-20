@@ -65,33 +65,46 @@ example: `http://localhost:3000/api/v1/forecast?location=denver,co`
 ```
 {
   "data": {
-    "id": null,
-    "type": "forecast",
-    "attributes": {
-      "current_weather": {
-        "datetime": "2020-09-30 13:27:03 -0600",
-        "temperature": 79.4,
-        etc
-      },
-      "daily_weather": [
-        {
-          "date": "2020-10-01",
-          "sunrise": "2020-10-01 06:10:43 -0600",
-          etc
-        },
-        {...} etc
-      ],
-      "hourly_weather": [
-        {
-          "time": "14:00:00",
-          "wind_speed": "4 mph",
-          "wind_direction": "from NW",
-          etc
-        },
-        {...} etc
-      ]
+      "id": null,
+      "type": "forecast",
+      "attributes": {
+          "current_weather": {
+              "datetime": "2021-01-20T07:46:12.000-07:00",
+              "sunrise": "2021-01-20T07:16:35.000-07:00",
+              "sunset": "2021-01-20T17:05:12.000-07:00",
+              "temperature": 30.660000000000025,
+              "feels_like": 25.400000000000034,
+              "humidity": 49,
+              "uvi": 0.19,
+              "visibility": 10000,
+              "conditions": "clear sky",
+              "icon": "01d"
+            },
+          "daily_weather": [
+              {
+                "date": "2021-01-20",
+                "sunrise": "2021-01-20T14:16:35.000+00:00",
+                "sunset": "2021-01-21T00:05:12.000+00:00",
+                "max_temp": 42.379999999999995,
+                "min_temp": 30.660000000000025,
+                "conditions": "clear sky",
+                "icon": "01d"
+              },
+              {...} etc
+            ],
+          "hourly_weather": [
+              {
+                "time": "07:01",
+                "temperature": 30.660000000000025,
+                "wind_speed": "6.89 mph",
+                "wind_direction": "from SSW",
+                "conditions": "clear sky",
+                "icon": "01n"
+              },
+              {...} etc
+            ]
+        }
     }
-  }
 }
 ```
   
@@ -100,24 +113,24 @@ example: `http://localhost:3000/api/v1/forecast?location=denver,co`
 #### Request a background image for a given city: `GET /api/v1/backgrounds`
 example: `http://localhost:3000/api/v1/backgrounds?location=denver,co`
 ```
+
 {
-{
-    "data": {
-        "id": null,
-        "type": "image",
-        "attributes": {
-            "image": {
-                "location": "denver,co",
-                "image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?crop=entropy&cs=srgb&fm=jpg&ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1&q=85",
-                "raw_image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1",
-                "credit": {
-                    "source": "https://unsplash.com",
-                    "author": "Michael Kilcoyne",
-                    "author_profile": "https://unsplash.com/@mikekilcoyne"
-                }
-            }
+  "data": {
+    "id": null,
+    "type": "image",
+  "attributes": {
+      "image": {
+          "location": "denver,co",
+          "image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?crop=entropy&cs=srgb&fm=jpg&ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1&q=85",
+          "raw_image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?ixid=MXwxOTkzMjd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1",
+        "credit": {
+            "source": "https://unsplash.com",
+            "author": "Michael Kilcoyne",
+            "author_profile": "https://unsplash.com/@mikekilcoyne"
         }
+      }
     }
+  }
 }
 ```    
     
@@ -183,11 +196,11 @@ example: `http://localhost:3000/api/v1/road_trip`<br>
     "type": "roadtrip",
     "attributes": {
       "start_city": "Denver, CO",
-      "end_city": "Estes Park, CO",
-      "travel_time": "2 hours, 13 minutes"
+      "end_city": "Pueblo, CO",
+      "travel_time": "01 hours, 44 minutes",
       "weather_at_eta": {
-        "temperature": 59.4,
-        "conditions": "partly cloudy"
+          "temperature": 27.100000000000023,
+          "conditions": "clear sky"
       }
     }
   }
