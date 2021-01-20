@@ -31,6 +31,12 @@ describe 'Mapquest Service' do
       expect(results[:info][:statuscode]).to eq(400)
       expect(results[:info][:messages][0]).to eq('Illegal argument from request: Insufficient info for location')
     end
+
+    it 'query with invalid params', :vcr do 
+      results = MapquestService.city_search('dasgasfgd')
+      city = results[:results][0][:locations][0][:adminArea5]
+      expect(city).to eq('')
+    end
   end
 
   describe 'Mapquest road trip' do
@@ -68,12 +74,22 @@ describe 'Mapquest Service' do
       expect(route[:locations][1][:latLng][:lat]).to eq(39.738453)
     end
 
-    it 'query with invalid params', :vcr do 
+    it 'query with invalid params', :vcr do
       from = 'Tillamook,OR'
       to = ''
       results = MapquestService.road_trip(from, to)
       expect(results[:info][:statuscode]).to eq(611)
       expect(results[:info][:messages][0]).to eq('At least two locations must be provided.')
+    end
+
+    it 'query with invalid params', :vcr do
+      from = 'Tillamook,OR'
+      to = 'asfasrfgasdfg'
+      results = MapquestService.road_trip(from, to)
+      start_city = results[:route][:locations][0][:adminArea5]
+      end_city = results[:route][:locations][1][:adminArea5]
+      expect(start_city).to eq('Tillamook')
+      expect(end_city).to eq('')
     end
   end
 end

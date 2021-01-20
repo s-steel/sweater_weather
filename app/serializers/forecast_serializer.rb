@@ -7,9 +7,9 @@ class ForecastSerializer
         "id": nil,
         "type": "forecast",
         "attributes": {
-          "current_weather": object[:current_weather],
-          "daily_weather": object[:daily_weather],
-          "hourly_weather": object[:hourly_weather]
+          "current_weather": object.current_weather,
+          "daily_weather": object.daily_weather,
+          "hourly_weather": object.hourly_weather
         }
       }
     }

@@ -5,7 +5,6 @@ class MapquestService
   class << self
     def city_search(city)
       city_response = conn.get('geocoding/v1/address') do |req|
-        req.params['key'] = ENV['MAPQUEST_CONSUMER_KEY']
         req.params['location'] = city
       end
       parse_it(city_response)
@@ -13,7 +12,6 @@ class MapquestService
 
     def road_trip(from, to)
       trip_response = conn.get('directions/v2/route') do |req|
-        req.params['key'] = ENV['MAPQUEST_CONSUMER_KEY']
         req.params['from'] = from
         req.params['to'] = to
       end
@@ -23,7 +21,10 @@ class MapquestService
     private
 
     def conn
-      Faraday.new('http://www.mapquestapi.com')
+      Faraday.new('http://www.mapquestapi.com') do |req|
+        req.params['key'] = ENV['MAPQUEST_CONSUMER_KEY']
+        req.adapter Faraday.default_adapter
+      end
     end
 
     def parse_it(data)

@@ -33,7 +33,7 @@ describe 'Weather poro' do
 
   it 'with invalid city query' do
     response = {
-      "cod": '400',
+      "code": '400',
       "message": 'Nothing to geocode'
     }
     weather_poro = WeatherDaily.new(response)

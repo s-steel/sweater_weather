@@ -4,8 +4,8 @@ require 'json'
 class UpsplashService
   class << self
     def image_search(location)
-      response = conn.get('search/photos') do |r|
-        r.params[:query] = location
+      response = conn.get('search/photos') do |req|
+        req.params[:query] = location
       end
       parse_it(response)
     end

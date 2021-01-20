@@ -8,7 +8,6 @@ class OpenweatherService
         req.params['lat'] = latitude
         req.params['lon'] = longitude
         req.params['exclude'] = 'alerts,minutely'
-        req.params['appid'] = ENV['OPENWEATHER_KEY']
       end
       parse_it(weather_response)
     end
@@ -16,7 +15,10 @@ class OpenweatherService
     private
 
     def conn
-      Faraday.new('https://api.openweathermap.org/data/2.5/onecall')
+      Faraday.new('https://api.openweathermap.org/data/2.5/onecall') do |req|
+        req.params['appid'] = ENV['OPENWEATHER_KEY']
+        req.adapter Faraday.default_adapter
+      end
     end
 
     def parse_it(data)

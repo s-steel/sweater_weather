@@ -19,4 +19,13 @@ RSpec.describe LocationFacade do
     expect(result.latitude).to be nil
     expect(result.longitude).to be nil
   end
+
+  it 'returns nil if invalid params entered', :vcr do
+    city = 'grfdsdfg'
+    result = LocationFacade.city_search(city)
+
+    expect(result).to be_a(Location)
+    expect(result.latitude).to be nil
+    expect(result.longitude).to be nil
+  end
 end
