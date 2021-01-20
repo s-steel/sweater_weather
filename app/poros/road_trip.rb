@@ -26,14 +26,22 @@ class RoadTrip
   end
 
   def location_start_city(location)
-    city = location[0][:adminArea5]
-    state = location[0][:adminArea3]
-    "#{city}, #{state}"
+    if location[0][:adminArea5] == ''
+      raise StandardError.new
+    else
+      city = location[0][:adminArea5]
+      state = location[0][:adminArea3]
+      "#{city}, #{state}"
+    end
   end
 
   def location_end_city(location)
-    city = location[1][:adminArea5]
-    state = location[1][:adminArea3]
-    "#{city}, #{state}"
+    if location[1][:adminArea5] == ''
+      raise StandardError.new
+    else
+      city = location[1][:adminArea5]
+      state = location[1][:adminArea3]
+      "#{city}, #{state}"
+    end
   end
 end
