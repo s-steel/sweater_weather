@@ -2,11 +2,12 @@ class ForecastFacade
   class << self
     def city_search(latitude, longitude, daily_limit = 7, hourly_limit = 48)
       response = OpenweatherService.city_search(latitude, longitude)
-      {
+      data = {
         current_weather: WeatherCurrent.new(response),
         daily_weather: daily_weather(response, daily_limit),
         hourly_weather: hourly_weather(response, hourly_limit)
       }
+      Forecast.new(data)
     rescue StandardError
       {
         error: 'Invalid params'
