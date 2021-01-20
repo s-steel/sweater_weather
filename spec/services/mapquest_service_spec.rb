@@ -74,7 +74,7 @@ describe 'Mapquest Service' do
       expect(route[:locations][1][:latLng][:lat]).to eq(39.738453)
     end
 
-    it 'query with invalid params', :vcr do 
+    it 'query with invalid params', :vcr do
       from = 'Tillamook,OR'
       to = ''
       results = MapquestService.road_trip(from, to)
@@ -82,13 +82,14 @@ describe 'Mapquest Service' do
       expect(results[:info][:messages][0]).to eq('At least two locations must be provided.')
     end
 
-    xit 'query with invalid params', :vcr do 
+    it 'query with invalid params', :vcr do
       from = 'Tillamook,OR'
       to = 'asfasrfgasdfg'
       results = MapquestService.road_trip(from, to)
-      require 'pry', binding.pry
-      expect(results[:info][:statuscode]).to eq(611)
-      expect(results[:info][:messages][0]).to eq('At least two locations must be provided.')
+      start_city = results[:route][:locations][0][:adminArea5]
+      end_city = results[:route][:locations][1][:adminArea5]
+      expect(start_city).to eq('Tillamook')
+      expect(end_city).to eq('')
     end
   end
 end

@@ -18,6 +18,3 @@ class Location
     end
   end
 end
-
-
-
