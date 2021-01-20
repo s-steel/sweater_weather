@@ -3,10 +3,21 @@ class Location
               :longitude
 
   def initialize(data)
-    @latitude = data[:results][0][:locations][0][:latLng][:lat]
-    @longitude = data[:results][0][:locations][0][:latLng][:lng]
+    @latitude = find_coordinates(data, :lat)
+    @longitude = find_coordinates(data, :lng)
   rescue StandardError
     @latitude = nil
     @longitude = nil
   end
+
+  def find_coordinates(data, lat_lon)
+    if data[:results][0][:locations][0][:adminArea5] == ''
+      nil
+    else
+      data[:results][0][:locations][0][:latLng][lat_lon]
+    end
+  end
 end
+
+
+
