@@ -79,5 +79,17 @@ RSpec.describe 'Road Trip', type: :request do
       expect(road_trip_data[:weather_at_eta]).to_not have_key(:temperature)
       expect(road_trip_data[:weather_at_eta]).to_not have_key(:conditions)
     end
+
+    it 'can login the user and return their api key', :vcr do
+      post '/api/v1/road_trip', params: {
+        "origin": 'Denver,CO',
+        "destination": '',
+        "api_key": @user.api_key.to_s
+      }.to_json, headers: { 'Content-Type' => 'application/json',
+                            'Accept' => 'application/json' }
+      expect(response).to have_http_status(422)
+      road_trip_response = JSON.parse(response.body, symbolize_names: true)
+      expect(road_trip_response[:error]).to eq('Invalid city, please try again')
+    end
   end
 end
