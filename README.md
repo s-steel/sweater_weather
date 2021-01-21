@@ -181,7 +181,7 @@ example: `http://localhost:3000/api/v1/sessions`<br>
   
 ### Road Trip
 
-#### Login a user and return their API key: `POST /api/v1/road_trip`
+#### Request information for a road trip: `POST /api/v1/road_trip`
 example: `http://localhost:3000/api/v1/road_trip`<br>
          ```body: {
                   "origin": "Denver,CO",
